@@ -1,0 +1,37 @@
+{
+  "agent_name": "Simple",
+  "submit": {
+    "type": "print",
+    "device": "stdout",
+    "format": "JsonEachRow"
+  },
+  "process": 1,
+  "perfmon": [
+    {
+      "name": "helloworld",
+      "type": "stdout",
+      "delay": 10,
+      "priority": 10,
+      "tasks": {
+        "method": "dummy",
+        "text": "Hello, world",
+        "format": null,
+        "expect": "string",
+        "timeout": 8
+      }
+    },
+    {
+      "name": "test_message",
+      "type": "stderr",
+      "delay": 8,
+      "priority": 10,
+      "tasks": {
+        "method": "dummy",
+        "text": "Second text",
+        "format": null,
+        "expect": "string",
+        "timeout": 6
+      }
+    }
+  ]
+}
