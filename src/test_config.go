@@ -1,14 +1,16 @@
 package main
 
 import (
-	"PerfmonGo/base/config"
+	"PerfmonGo/core/agentConfig"
 	"fmt"
 )
 
 func main() {
-	a, err := config.New("agent.json")
+	a, err := agentConfig.New("agent.json")
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
-	a.FindKey("a", "b", "c")
+	fmt.Println(a.GetAgentName())
+	fmt.Println(a.GetSubmitConfig())
 }
