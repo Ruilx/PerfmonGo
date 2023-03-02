@@ -1,12 +1,12 @@
 package logger
 
 import (
+	"PerfmonGo/util"
 	"fmt"
 	"io"
 	"log"
 	"path"
 	"runtime"
-	"time"
 )
 
 const (
@@ -17,8 +17,6 @@ const (
 	Error
 	Fatal
 )
-
-const WiredTime = "2006-01-02 15:04:05.000"
 
 type Logger struct {
 	logger *log.Logger
@@ -36,10 +34,6 @@ func funcInfo(skip int) (string, string, int) {
 	f := runtime.FuncForPC(pc[0])
 	file, line := f.FileLine(pc[0])
 	return f.Name(), file, line
-}
-
-func now() string {
-	return time.Now().Format(WiredTime)
 }
 
 func levelName(level int) string {
@@ -63,7 +57,7 @@ func levelName(level int) string {
 
 func prefix(level int, name string, funcName string, file string, line int) string {
 	return fmt.Sprintf("[%s] %s(%s): %s:%d: %s:",
-		now(),
+		util.Now(),
 		levelName(level),
 		name,
 		file, line, funcName)
