@@ -42,7 +42,24 @@ func CheckValueEnum(value any, valueMustInList []any, valueCanBeNone bool, value
 			}
 			return errors.New(fmt.Sprintf("value '%s' not exist in list", value))
 		} else {
-			return errors.New(fmt.Sprintf("value '%s' is Nil.", value))
+			return errors.New(fmt.Sprintf("value '%s' is Nil", value))
+		}
+	}
+}
+
+func CheckValueEnumT[T comparable](value T, valueMustInList []T, valueCanBeNone bool, valueName string) error {
+	if valueCanBeNone && value == nil {
+		return nil
+	} else {
+		if value != nil {
+			for _, v := range valueMustInList {
+				if v == value {
+					return nil
+				}
+			}
+			return errors.New(fmt.Sprintf("value '%s' not exist in list", value))
+		} else {
+			return errors.New(fmt.Sprintf("value '%s' is Nil", value))
 		}
 	}
 }

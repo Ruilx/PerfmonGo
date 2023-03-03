@@ -1,28 +1,28 @@
 package agentConfig
 
 import (
-	"PerfmonGo/base/config"
+	"PerfmonGo/base/configBase"
 	"errors"
 	"fmt"
 	"strconv"
 )
 
 type AgentConfig struct {
-	config.ConfigBase
+	configBase.ConfigBase
 }
 
 func New(filePath string) (*AgentConfig, error) {
-	c, err := config.New(filePath)
+	c, err := configBase.New(filePath)
 	if err != nil {
 		return nil, err
 	}
 	ac := &AgentConfig{*c}
 
 	if _, err := ac.GetAgentName(); err != nil {
-		return nil, errors.New(fmt.Sprintf("config need 'agent_name' key: %s", err.Error()))
+		return nil, errors.New(fmt.Sprintf("configBase need 'agent_name' key: %s", err.Error()))
 	}
 	if _, err := ac.GetPerfmonItems(); err != nil {
-		return nil, errors.New(fmt.Sprintf("config need 'perfmon' key: %s", err.Error()))
+		return nil, errors.New(fmt.Sprintf("configBase need 'perfmon' key: %s", err.Error()))
 	}
 	return ac, nil
 }
@@ -35,7 +35,7 @@ func (c *AgentConfig) GetAgentName() (string, error) {
 	if name, ok := val.(string); ok {
 		return name, nil
 	}
-	return "", errors.New("config key 'agent_name' not a string")
+	return "", errors.New("configBase key 'agent_name' not a string")
 }
 
 func (c *AgentConfig) GetPerfmonItems() ([]any, error) {
@@ -46,7 +46,7 @@ func (c *AgentConfig) GetPerfmonItems() ([]any, error) {
 	if items, ok := val.([]any); ok {
 		return items, nil
 	}
-	return nil, errors.New("config key 'perfmon' not a list")
+	return nil, errors.New("configBase key 'perfmon' not a list")
 }
 
 func (c *AgentConfig) GetSubmitConfig() (map[string]any, error) {
@@ -57,7 +57,7 @@ func (c *AgentConfig) GetSubmitConfig() (map[string]any, error) {
 	if submit, ok := val.(map[string]any); ok {
 		return submit, nil
 	}
-	return nil, errors.New("config key 'submit' not a dict<string>")
+	return nil, errors.New("configBase key 'submit' not a dict<string>")
 }
 
 func (c *AgentConfig) GetReportUrl() (string, error) {
@@ -68,7 +68,7 @@ func (c *AgentConfig) GetReportUrl() (string, error) {
 	if report, ok := val.(string); ok {
 		return report, nil
 	}
-	return "", errors.New("config key 'report' not a string")
+	return "", errors.New("configBase key 'report' not a string")
 }
 
 func (c *AgentConfig) GetProcessCount() (int, error) {

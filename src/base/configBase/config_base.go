@@ -1,4 +1,4 @@
-package config
+package configBase
 
 import (
 	"errors"
@@ -35,7 +35,7 @@ func (c *ConfigBase) loadConfig() (err error) {
 		return errors.New(fmt.Sprintf("file path '%s' not exist.", c.filePath))
 	}
 	if stat.IsDir() {
-		return errors.New(fmt.Sprintf("file path '%s' not a config file", c.filePath))
+		return errors.New(fmt.Sprintf("file path '%s' not a configBase file", c.filePath))
 	}
 	data, err := os.ReadFile(c.filePath)
 	json := jsonIter.ConfigCompatibleWithStandardLibrary
